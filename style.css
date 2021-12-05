@@ -1,0 +1,9 @@
+html, body, #chart {
+  height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .highcharts-title .highcharts-br {
+    display: none;
+  }
+}
