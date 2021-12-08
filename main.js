@@ -3,7 +3,7 @@ import { drawChart } from './chart.js';
 
 const eventId = 212;
 const eventData = await princess.events.get({ eventId });
-const rankingLogs = await princess.rankings.logs({ eventId, type: 'eventPoint', ranks: range(1, 10) });
+const rankingLogs = await princess.rankings.logs({ eventId, type: 'eventPoint', ranks: range(1, 15) });
 
 drawChart(eventData, rankingLogs);
 

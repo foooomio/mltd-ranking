@@ -32,6 +32,11 @@ export function drawChart(eventData, rankingLogs) {
           rotation: 0,
           y: 16,
         },
+      }, {
+        value: Date.parse(eventData.schedule.endDate),
+        width: 2,
+        color: '#ffaaaa',
+        zIndex: 1,
       }],
       gridLineWidth: 1,
       tickInterval: 24 * HOUR,
