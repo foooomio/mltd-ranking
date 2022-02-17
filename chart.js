@@ -49,9 +49,6 @@ export function drawChart(eventData, rankingLogs) {
     yAxis: {
       title: undefined,
     },
-    legend: {
-      enabled: false,
-    },
     tooltip: {
       animation: false,
       shared: true,

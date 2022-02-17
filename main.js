@@ -1,9 +1,22 @@
 import princess, { range } from 'https://cdn.jsdelivr.net/gh/foooomio/mltd-tools@1.0.0/princess-client.js';
 import { drawChart } from './chart.js';
 
-const eventId = 212;
-const eventData = await princess.events.get({ eventId });
-const rankingLogs = await princess.rankings.logs({ eventId, type: 'eventPoint', ranks: range(1, 15) });
+const events = await princess.events.get({
+  type: ['theater', 'tour', 'anniversary', 'twinstage', 'tune', 'tale', 'treasure'],
+});
+
+const eventData = events.pop();
+
+const rankingLogs = [];
+
+for (let i = 20; i < 50; i += 10) {
+  const logs = await princess.rankings.logs({
+    eventId: eventData.id,
+    type: 'eventPoint',
+    ranks: range(i, i + 10),
+  });
+  rankingLogs.push(...logs);
+}
 
 drawChart(eventData, rankingLogs);
 
