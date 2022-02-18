@@ -9,11 +9,11 @@ const eventData = events.pop();
 
 const rankingLogs = [];
 
-for (let i = 20; i < 50; i += 10) {
+for (let i = 1; i < 50; i += 10) {
   const logs = await princess.rankings.logs({
     eventId: eventData.id,
     type: 'eventPoint',
-    ranks: range(i, i + 10),
+    ranks: range(i, i + 9),
   });
   rankingLogs.push(...logs);
 }
