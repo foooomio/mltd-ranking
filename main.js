@@ -1,24 +1,29 @@
 import princess, { range } from 'https://cdn.jsdelivr.net/gh/foooomio/mltd-tools@1.0.0/princess-client.js';
 import { drawChart } from './chart.js';
 
-const events = await princess.events.get({
+const eventsPromise = princess.events.get({
   type: ['theater', 'tour', 'anniversary', 'twinstage', 'tune', 'tale', 'treasure'],
 });
 
-const eventData = events.pop();
+document.querySelector('form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  e.target.style.display = 'none';
 
-const rankingLogs = [];
+  const eventData = (await eventsPromise).pop();
+  const rank = Number(e.target.rank.value);
+  const rankingLogs = [];
 
-for (let i = 1; i < 50; i += 10) {
-  const logs = await princess.rankings.logs({
-    eventId: eventData.id,
-    type: 'eventPoint',
-    ranks: range(i, i + 9),
-  });
-  rankingLogs.push(...logs);
-}
+  for (let i = rank; i < rank + 20; i += 10) {
+    const logs = await princess.rankings.logs({
+      eventId: eventData.id,
+      type: 'eventPoint',
+      ranks: range(i, i + 9),
+    });
+    rankingLogs.push(...logs);
+  }
 
-drawChart(eventData, rankingLogs);
+  drawChart(eventData, rankingLogs);
+});
 
 document.addEventListener('touchmove', (e) => {
   e.preventDefault();
